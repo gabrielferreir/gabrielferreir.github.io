@@ -1,21 +1,44 @@
 import React from "react"
-import { Link } from "gatsby"
+import {graphql} from "gatsby"
+import {Link} from "gatsby"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+const IndexPage = ({
+                       data: {
+                           allMarkdownRemark: {edges},
+                       },
+                   }) => {
+    const Posts = edges
+        .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
+        .map(edge => {
+            console.log(edge);
+            return (
+                <Link to={edge.node.frontmatter.path}>
+                    <h1>{edge.node.frontmatter.title}</h1>
+                    <img src={edge.node.frontmatter.image} />
+                    <div>{`${edge.node.excerpt}`}</div>
+                </Link>);
+        });
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+    return <div>{Posts}</div>
+};
 
 export default IndexPage
+
+export const pageQuery = graphql`
+query MyQuery {
+  allMarkdownRemark {
+    edges {
+      node {
+        id
+        frontmatter {
+          image
+          date
+          path
+          title
+        }
+        excerpt
+      }
+    }
+  }
+}
+`;
