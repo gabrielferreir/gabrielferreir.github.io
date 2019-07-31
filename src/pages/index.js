@@ -1,6 +1,7 @@
 import React from "react"
 import {graphql} from "gatsby"
 import {Link} from "gatsby"
+import Layout from "../components/layout";
 
 const IndexPage = ({
                        data: {
@@ -19,7 +20,7 @@ const IndexPage = ({
                 </Link>);
         });
 
-    return <div>{Posts}</div>
+    return <Layout>{Posts}</Layout>
 };
 
 export default IndexPage
