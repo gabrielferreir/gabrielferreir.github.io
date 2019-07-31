@@ -1,7 +1,7 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {Link} from "gatsby"
 import Layout from "../components/layout";
+import Post from "../components/post";
 
 const IndexPage = ({
                        data: {
@@ -13,11 +13,17 @@ const IndexPage = ({
         .map(edge => {
             console.log(edge);
             return (
-                <Link to={edge.node.frontmatter.path}>
-                    <h1>{edge.node.frontmatter.title}</h1>
-                    <img src={edge.node.frontmatter.image} />
-                    <div>{`${edge.node.excerpt}`}</div>
-                </Link>);
+                <Post   path={edge.node.frontmatter.path}
+                        image={edge.node.frontmatter.image}
+                        description={edge.node.excerpt}
+                        title={edge.node.frontmatter.title}
+                />
+                // <Link to={edge.node.frontmatter.path}>
+                //     <h1>{edge.node.frontmatter.title}</h1>
+                //     <img src={edge.node.frontmatter.image} />
+                //     <div>{`${edge.node.excerpt}`}</div>
+                // </Link>
+        );
         });
 
     return <Layout>{Posts}</Layout>

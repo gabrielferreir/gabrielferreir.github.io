@@ -50,3 +50,7 @@ html, body {
     background-repeat: no-repeat;
     margin-right: 16px;
 }
+
+.main {
+    max-width: 960px;
+}
