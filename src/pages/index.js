@@ -17,6 +17,8 @@ const IndexPage = ({
                         image={edge.node.frontmatter.image}
                         description={edge.node.excerpt}
                         title={edge.node.frontmatter.title}
+                        date={edge.node.frontmatter.date}
+
                 />
                 // <Link to={edge.node.frontmatter.path}>
                 //     <h1>{edge.node.frontmatter.title}</h1>
