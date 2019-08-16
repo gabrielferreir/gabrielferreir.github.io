@@ -1,6 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: `Gabriel Ferreira`,
+        description: `Um Blog com posts sobre Flutter, Javascript, BLOC, React e outras tecnologias.`,
         author: `Gabriel Ferreira`,
     },
     plugins: [
