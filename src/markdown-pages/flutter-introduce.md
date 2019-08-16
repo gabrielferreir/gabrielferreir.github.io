@@ -20,8 +20,8 @@ e o lançamento da versão estavel(1.0.0) aconteceu no dia 4 de dezembro de 2018
 
 - Fluidez
    
-![Galery](https://github.com/gabrielferreir/flutter-introduce/blob/master/images/galery-animation.gif)
-![Galery](https://github.com/gabrielferreir/flutter-introduce/blob/master/images/galery-posse.gif)
+![Galery](/flutter-introduce/galery-animation.gif)
+![Galery](/flutter-introduce/galery-posse.gif)
 
 ## Dart
 Cogitaram o uso de muitas linguagem no inicio do desenvolvimento do Flutter, entre elas a linguagem que
@@ -46,11 +46,11 @@ que o app inicie rapidamente. E o JIT torna HotReload possível, fazendo com que
 em tempo de execução e que mantenha o estado de desenvolvimento, e como resultado isso faz com que suas variáveis não percam o valor 
 enquanto seu app é recarregado na fase de desenvolvimento.
 
-![HotReload](https://github.com/gabrielferreir/flutter-introduce/blob/master/images/hotreload.gif)
+![HotReload](/flutter-introduce/hotreload.gif)
 
 ## Flutter vs WebViews(Ionic/Cordova)
 
-![WebViews](https://github.com/gabrielferreir/flutter-introduce/blob/master/images/webview.png)
+![WebViews](/flutter-introduce/webview.png)
 
 As WebViews renderizam paginas web e executam o seu codigo HTML/CSS/Javascript e como o Javascript não se 
 comunica diretamente com o codigo nativo eles passam por uma ponte(Bridge) e é essa ponte que ira se comunicar com o 
@@ -59,14 +59,14 @@ Bluetooth e etc.
 
 ## Ponte(Bridge)
 
-![Bridge](https://github.com/gabrielferreir/flutter-introduce/blob/master/images/bridge.png)
+![Bridge](/flutter-introduce/bridge.png)
 
 A ponte trabalha de maneira semelhante a de um WebSocket que envia e recebe informações e esse fluxo acontece de ambos os
 lados, enviando dados do seu codigo Javascript e recebendo dados da sua plataforma nativa.  
 
 ## Flutter vs React Native?
 
-![reactive-views](https://github.com/gabrielferreir/flutter-introduce/blob/master/images/reactive-views.png)
+![reactive-views](/flutter-introduce/reactive-views.png)
 
 Com o React-native não é diferente, ele não se comunica diretamente com o dominio nativo.
 Mesmo que a maior parte do codigo do app seja escrito em Javascript a interface do usuario
@@ -82,7 +82,7 @@ por segundos o que dificulta que o app rode a 60 fps e deixe seu app com uma flu
 
 ## Como o Flutter funciona?
 
-![Flutter](https://github.com/gabrielferreir/flutter-introduce/raw/master/images/flutter.png)
+![Flutter](/flutter-introduce/flutter.png)
 
 
 O Flutter utiliza uma abordagem diferente, ele abandona a Brigde e utiliza uma linguagem 
@@ -98,11 +98,11 @@ para criação de aplicativos, ele funciona de maneira semelhante a de um mecani
 O Flutter utiliza um mecanismo chamado Skia que recebe seus Widgets e envia as informações diretamente para o 
 canvas da plataforma e a plataforma retorna os eventos conforme necessário.
 
-![Skia](https://github.com/gabrielferreir/flutter-introduce/raw/master/images/skia.png) 
+![Skia](/flutter-introduce/skia.png) 
 
 ## Fluter não utiliza os widgets OEM
 
-![Evolution](https://github.com/gabrielferreir/flutter-introduce/raw/master/images/evolution.png)
+![Evolution](/flutter-introduce/evolution.png)
 
 Os widgets OEM são os widgets nativos de cada interface. 
 Porem isso não significa que você terá que criar seus Widgets do zero, Os Widgets de 
@@ -110,7 +110,7 @@ ambas as plataformas estarão disponíveis para uso somente na versão mais rece
 
 ##### Isso significa que seus usuario mais atentos podem ter surpresas...
 
-![OEM](https://github.com/gabrielferreir/flutter-introduce/raw/master/images/oem.png)
+![OEM](/flutter-introduce/oem.png)
 
 
 ## Biografia
