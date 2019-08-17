@@ -2,6 +2,7 @@ import React from "react"
 import {graphql} from "gatsby"
 import Layout from "../components/layout";
 import Post from "../components/post";
+import SEO from "../components/seo";
 
 const IndexPage = ({
                        data: {
@@ -13,22 +14,25 @@ const IndexPage = ({
         .map(edge => {
             console.log(edge);
             return (
-                <Post   path={edge.node.frontmatter.path}
-                        image={edge.node.frontmatter.image}
-                        description={edge.node.excerpt}
-                        title={edge.node.frontmatter.title}
-                        date={edge.node.frontmatter.date}
+                <Post path={edge.node.frontmatter.path}
+                      image={edge.node.frontmatter.image}
+                      description={edge.node.excerpt}
+                      title={edge.node.frontmatter.title}
+                      date={edge.node.frontmatter.date}
 
                 />
-                // <Link to={edge.node.frontmatter.path}>
-                //     <h1>{edge.node.frontmatter.title}</h1>
-                //     <img src={edge.node.frontmatter.image} />
-                //     <div>{`${edge.node.excerpt}`}</div>
-                // </Link>
-        );
+            );
         });
 
-    return <Layout>{Posts}</Layout>
+    return <Layout>
+        <SEO title="gabrielferreir.github.io"
+             description="Um Blog com posts sobre Flutter, Javascript, BLOC, React e outras tecnologias."
+             meta={[{
+                 'keywords': 'Blog, Flutter, Gabriel Ferreira, BLOC, Javascript, React'
+             }]}
+        />
+        {Posts}
+    </Layout>
 };
 
 export default IndexPage

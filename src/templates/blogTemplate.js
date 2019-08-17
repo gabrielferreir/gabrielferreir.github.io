@@ -4,16 +4,22 @@ import {graphql} from "gatsby"
 import "./blogTemplate.css"
 import Layout from "../components/layout";
 import {Helmet} from "react-helmet";
+import SEO from "../components/seo";
 
 export default function Template({
                                      data, // this prop will be injected by the GraphQL query below.
                                  }) {
     const {markdownRemark} = data; // data.markdownRemark holds our post data
-    const {frontmatter, html} = markdownRemark;
+    const {frontmatter, html, excerpt} = markdownRemark;
+    console.log('markdownRemark', markdownRemark);
     return (
         <Layout>
+            <SEO
+                title={frontmatter.title}
+                description={excerpt}
+            />
             <Helmet>
-                <meta charSet="utf-8" />
+                <meta charSet="utf-8"/>
                 <title>{frontmatter.title}</title>
             </Helmet>
             <div className="blog-post-container">
@@ -38,6 +44,7 @@ export const pageQuery = graphql`
         path
         title
       }
+      excerpt
     }
   }
 `
