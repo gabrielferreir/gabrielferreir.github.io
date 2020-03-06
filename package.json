@@ -2,7 +2,7 @@
   "name": "gatsby-starter-default",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Gabriel Ferreira <gabrielferrer@outlook.com.br>",
   "dependencies": {
     "gatsby": "^2.13.42",
@@ -42,11 +42,4 @@
     "serve": "gatsby serve",
     "deploy": "gatsby build && gh-pages -b master -d public"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
 }
