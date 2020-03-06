@@ -41,5 +41,5 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "deploy": "gatsby build && gh-pages -b master -d public"
-  },
+  }
 }
