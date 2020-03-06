@@ -3,7 +3,7 @@
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Gabriel Ferreira <gabrielferrer@outlook.com.br>",
   "dependencies": {
     "gatsby": "^2.13.42",
     "gatsby-image": "^2.2.7",
@@ -26,7 +26,12 @@
     "prettier": "^1.18.2"
   },
   "keywords": [
-    "gatsby"
+    "Gabriel Ferreira",
+    "Flutter",
+    "Node",
+    "React",
+    "JavaScript",
+    "TypeScript"
   ],
   "license": "MIT",
   "scripts": {
@@ -35,7 +40,6 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "repository": {
