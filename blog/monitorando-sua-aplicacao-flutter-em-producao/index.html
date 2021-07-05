@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="pt-br"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.0c335742c386b71c8e66.css" id="gatsby-global-css">.tl-edges{max-width:100%;overflow-x:hidden}.tl-wrapper{width:100%;float:left;position:relative}.tl-wrapper+.tl-wrapper{margin-left:-100%;margin-right:0}.blog-post-container .date{font-family:Montserrat,sans-serif;font-size:14px;font-weight:500;color:rgba(0,0,0,.87);padding:16px;text-align:right}.blog-post-container p{font-size:18px;font-weight:400;margin:1.3em 0;line-height:1.8em}.blog-post-container h1,.blog-post-container h2,.blog-post-container h3,.blog-post-container h4,.blog-post-container h5,.blog-post-container h6,.blog-post-container p{font-family:Roboto,sans-serif;color:rgba(0,0,0,.87)}.blog-post-content a{color:rgba(0,0,0,.87);text-decoration:underline}.blog-post-content img{max-width:100%}pre{font-size:16px;font-weight:400;background-color:#fafafa;padding:16px 32px;overflow-x:auto}.blog-post-container h1,pre{font-family:Montserrat,sans-serif;color:rgba(0,0,0,.87)}.blog-post-container h1{display:flex;justify-content:center;align-items:center;padding:64px 0;font-size:32px}.blog-post-container h2{font-family:Montserrat,sans-serif;font-size:26px;font-weight:500;color:rgba(0,0,0,.87);padding:8px 0}.blog-post-container ul{list-style:none}.blog-post-container li{font-size:21px;font-family:Roboto,sans-serif;padding-left:16px;margin:2em 0}*{margin:0;padding:0;box-sizing:border-box}body{overflow-y:scroll}body,html{min-height:100%}@media (min-width:901px){.wrapper{width:100%;max-width:1280px;margin:0 auto;display:flex}.navbar{min-width:320px;max-width:320px;height:100%;min-height:100vh;padding:16px}}@media (max-width:900px){.wrapper{flex-wrap:wrap}.navbar{width:100%;height:auto!important;min-height:auto;min-width:auto;max-width:none}.main,.navbar{padding:16px}img{max-width:100%}}a{color:rgba(0,0,0,.87);text-decoration:none}.navbar__header{display:flex;align-items:center}.navbar__name{font-size:22px;color:rgba(0,0,0,.87)}.navbar__name,.navbar__work{font-family:Montserrat,sans-serif;font-weight:400}.navbar__work{font-size:14px;color:rgba(0,0,0,.64)}.navbar__image{height:64px;width:64px;border-radius:50%;background-image:url(https://avatars1.githubusercontent.com/u/28937838?s=460&v=4);background-size:cover;background-position:bottom;background-repeat:no-repeat;margin-right:16px}.main{max-width:780px}.post{padding:32px 16px;border-bottom:1px solid rgba(0,0,0,.14);display:flex}.post__content{max-width:700px}.post__title{font-size:22px;padding-bottom:8px}.post__description,.post__title{font-family:Montserrat,sans-serif;font-weight:400;color:rgba(0,0,0,.87);text-decoration:none}.post__description{font-size:14px}.post__data{font-family:Montserrat,sans-serif;font-size:12px;font-weight:400;color:rgba(0,0,0,.64);text-decoration:none}</style><meta name="generator" content="Gatsby 2.32.13"/><title data-react-helmet="true">Monitorando sua aplicação Flutter em produção | Gabriel Ferreira</title><meta data-react-helmet="true" name="description" content="Após subir uma aplicação em produção, é bem provável que seus usuários encontrem alguns erros durante o uso de sua
+aplicação. Sabendo disso…"/><meta data-react-helmet="true" property="og:title" content="Monitorando sua aplicação Flutter em produção"/><meta data-react-helmet="true" property="og:description" content="Após subir uma aplicação em produção, é bem provável que seus usuários encontrem alguns erros durante o uso de sua
+aplicação. Sabendo disso…"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Gabriel Ferreira"/><meta data-react-helmet="true" name="twitter:title" content="Monitorando sua aplicação Flutter em produção"/><meta data-react-helmet="true" name="twitter:description" content="Após subir uma aplicação em produção, é bem provável que seus usuários encontrem alguns erros durante o uso de sua
+aplicação. Sabendo disso…"/><meta data-react-helmet="true" charSet="utf-8"/><link rel="icon" href="/favicon-32x32.png?v=7533a9974775a68e04521bd7630aab10" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#663399"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=7533a9974775a68e04521bd7630aab10"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=7533a9974775a68e04521bd7630aab10"/><link as="script" rel="preload" href="/webpack-runtime-151e9955fd4a68841527.js"/><link as="script" rel="preload" href="/framework-8e528b732ab2eaadb7b7.js"/><link as="script" rel="preload" href="/app-a914769348361b28f60e.js"/><link as="script" rel="preload" href="/styles-407fe62976dc5310c43e.js"/><link as="script" rel="preload" href="/commons-846ab9b864e6dbbdd9b6.js"/><link as="script" rel="preload" href="/component---src-templates-blog-template-js-3048ecaa836bff2c3d61.js"/><link as="fetch" rel="preload" href="/page-data/blog/monitorando-sua-aplicacao-flutter-em-producao/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/63159454.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="tl-edges"><div class="tl-wrapper tl-wrapper--mount tl-wrapper-status--entered" style="z-index:1;opacity:1"><div class="wrapper"><aside class="navbar"><a href="/"><header class="navbar__header"><div class="navbar__image"></div><div><h1 class="navbar__name">Gabriel Ferreira</h1><h2 class="navbar__work">Fullstack Developer</h2></div></header></a></aside><main class="main"><div class="blog-post-container"><div class="blog-post"><h1>Monitorando sua aplicação Flutter em produção</h1><div class="date">July 04, 2021</div><div class="blog-post-content"><p>Após subir uma aplicação em produção, é bem provável que seus usuários encontrem alguns erros durante o uso de sua
+aplicação.</p>
+<p>Sabendo disso, é importante que você desenvolva formas de capturar erros e informações relevantes que levarão a
+aplicação a falhar.</p>
+<p>A ferramenta mais conhecida para captura de erros em aplicações mobile é o Crashlytics.</p>
+<p>Vamos começar.</p>
+<ul>
+<li><a href="#criando-projeto-no-firebase">Criando projeto no Firebase</a></li>
+<li><a href="#instalacao-no-android">Instação no Android</a></li>
+<li><a href="#instalacao-no-ios">Instação no IOS</a></li>
+<li><a href="#instalacao-na-web">Instação no Web</a></li>
+</ul>
+<p><a name="criando-projeto-no-firebase"></a></p>
+<h2>Criando projeto no Firebase</h2>
+<p>O primeiro passo para a instalação do Crashlytics é a criação de um projeto no Firebase.</p>
+<p>Acesse o <a href="https://console.firebase.google.com/u/0/project/_/overview">Firebase Console</a> e clique em "Adicionar projeto".</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/01.png" alt="Galery"></p>
+<p>Dê um nome para o seu projeto.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/02.png" alt="Galery"></p>
+<p>Desmarque a opção "Ativar o Google Analytics neste projeto".</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/03.png" alt="Galery"></p>
+<p><a name="instalacao-no-android"></a></p>
+<h2>Instalação no Android</h2>
+<p>Vamos iniciar com a configuração no Android.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/04.png" alt="Galery"></p>
+<p>Durante a criação o nome do pacote deve ser exatamente igual ao que está no arquivo *
+android/app/src/main/AndroidManifest.xml*.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/05.png" alt="Galery"></p>
+<p>Faça o download do <strong>google-services.json</strong> e cole na pasta <strong>android/app</strong>.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/06.png" alt="Galery"></p>
+<p>Adicione o plugin do google-service no arquivo <strong>android/build.gradle</strong>.</p>
+<pre><code>buildscript {
+    ...
+    repositories {
+        ...
+    }
+
+    dependencies {
+        ...
+        classpath 'com.google.gms: google-services: 4.3.3'
+    }
+}
+</code></pre>
+<p>Execute o plugin do google-service adicionando  <strong>apply plugin: 'com.android.application'</strong>
+no arquivo <strong>/android/app/build.gradle</strong>.</p>
+<pre><code>...
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+...
+</code></pre>
+<p>No arquivo <strong>/android/app/build.gradle</strong> habilite o Multidex e o adicione nas dependecias.</p>
+<pre><code>android {
+    ...
+    defaultConfig {
+        applicationId "com.example.crashlytics_demo"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+    ...
+}
+...
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementação 'com.android.support:multidex:1.0.3'
+}
+</code></pre>
+<p>Habilite o <strong>android:usesCleartextTraffic="true"</strong> para que você possa realizar os testes usando um emulador.</p>
+<pre><code>&#x3C;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.crashlytics_demo">
+
+    &#x3C;application
+        android:icon="@mipmap/ic_launcher"
+        android:label="crashlytics_demo"
+        android:usesCleartextTraffic="true">
+</code></pre>
+<p><a name="instalacao-no-ios"></a></p>
+<h2>Instalação no IOS</h2>
+<p>Agora vamos configurar o Firebase para IOS.</p>
+<p>Selecione a opção "Adicionar app", após isso selecione "IOS".</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/07.png" alt="Galery">
+<img src="/monitorando-sua-aplicacao-flutter-em-producao/08.png" alt="Galery"></p>
+<p>Da mesma forma que fizemos no Android, devemos utilizar o nome do pacote igual ao que está no "Bundle
+identifier" do IOS.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/09.png" alt="Galery"></p>
+<p>Prossiga com a instalação e faça o download do arquivo "GoogleService-Info.plist".</p>
+<p>Para adicionar esse arquivo em um projeto IOS você deve usar o Xcode.</p>
+<p>Com o projeto aberto clique com o botão direito em "Runner" e selecione a opção "Add Files to Runner".</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/10.png" alt="Galery"></p>
+<p>Encontre e selecione o arquivo "GoogleService-Info.plist" e verifique se
+"Copy items if needed" está selecionado.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/11.png" alt="Galery"></p>
+<p>Você ainda precisa ativar o Firebase para funcionar quando você estiver utilizando um emulador.</p>
+<p>Para isso abra o arquivo "Info.plist" clicando com o botão direito em cima dele e selecionando a opção "Open as" > "
+Source Code".</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/12.png" alt="Galery"></p>
+<p>E adicione essa chave:</p>
+<pre><code>...
+    &#x3C;key>NSAppTransportSecurity&#x3C;/key>
+    &#x3C;dict>
+        &#x3C;key>NSAllowsLocalNetworking&#x3C;/key>
+        &#x3C;true/>
+    &#x3C;/dict>
+&#x3C;/dict>
+&#x3C;/plist>
+</code></pre>
+<h2>Instalando pacotes</h2>
+<p>Instale as dependências do Crashlytics.</p>
+<pre><code>dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: "^1.3.0"
+  firebase_crashlytics: "^2.0.6"
+</code></pre>
+<h2>Configurando Crashlytics no Android</h2>
+<pre><code>dependencies {
+  ...
+  classpath 'com.google.gms:google-services:4.3.5'
+  classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.1'
+}
+</code></pre>
+<pre><code>... 
+android {
+    ...
+}
+
+dependencies {
+    ...
+}
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+</code></pre>
+<h2>Configurando Crashlytics no IOS</h2>
+<p>Abra sua aplicação no Xcode. Clique em "Runner", selecione a opção "Build Phases"
+em seguida clique em "+" > "New Run Script Phase".</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/17.png" alt="Galery"></p>
+<p>Adicione "${PODS_ROOT}/FirebaseCrashlytics/run" na caixa de texto.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/18.png" alt="Galery"></p>
+<h2>Ativação do Crashlytics</h2>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/19.png" alt="Galery"></p>
+<h2>Iniciando o Crashlytics</h2>
+<p>No seu arquivo <strong>main.dart</strong> faça a inicialização do Firebase.</p>
+<pre><code>import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State&#x3C;MyApp> {
+  final Future&#x3C;FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: FutureBuilder(
+            future: _initialization,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) return Center(child: Text('Error'));
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Scaffold(
+                    appBar: AppBar(),
+                    body: Center(
+                      child: Text('Home'),
+                    ));
+              }
+              return Center(child: CircularProgressIndicator());
+            }));
+  }
+}
+</code></pre>
+<h2>Evento de Crash</h2>
+<p>Adicione um botão e simule um evento de crash na aplicação.</p>
+<pre><code>ElevatedButton(
+    child: Text('CRASH'),
+    onPressed: () {
+      FirebaseCrashlytics.instance.crash();
+    },
+),
+</code></pre>
+<p>Rode sua aplicação e clique no botão Crash. Após isso esperamos que chegue um erro no Firebase Console.</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/20.png" alt="Galery"></p>
+<h2>Enviando um erro</h2>
+<p>Você pode enviar um erro manualmente para o Crashlytics utilizando o <code>recordError</code>.</p>
+<p><strong>Parametros:</strong></p>
+<ul>
+<li>error: dynamic (Obrigatorio) -> Nesse campo você deve enviar a Exception ou a string do erro.</li>
+<li>stackTrace: StackTrace (Obrigatorio) -> A pilha de informações de onde o erro ocorreu. (O Crashlytics utiliza esse
+campo para fazer o agrupamento dos erros).</li>
+<li>reason: String (Opcional) ->  O valor enviado nesse campo será salvo na propriedade <code>flutter_error_reason</code>. Você
+poderia visualizar essa mensagem acessando os detalhes do erro no Console do Firebase. Você pode utilizar esse campo
+para realizar filtros e encontrar todos os erros que possuem e mesma propriedade.</li>
+<li>fatal: boolean (Opcional) ->  Boolean que indicará se o erro é do tipo fatal.</li>
+</ul>
+<pre><code>...
+onPressed: () async {
+  try {
+    throw Exception('Teste');
+  } catch(error, stackTrace) {
+    await FirebaseCrashlytics.instance.recordError(
+        error,
+        stackTrace,
+        reason: 'a error test',
+        fatal: true,
+    );
+  }
+},
+...
+</code></pre>
+<h2>Adicionando uma chave personalizada</h2>
+<p>Podemos adicionar chaves personalizadas ao erro do Crashlytics, para isso usamos o método <code>setCustomKey</code>.</p>
+<pre><code>import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State&#x3C;MyApp> {
+  final Future&#x3C;FirebaseApp> _initialization = Firebase.initializeApp();
+  String _type = 'Padrao';
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: FutureBuilder(
+            future: _initialization,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) return Center(child: Text('Error'));
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Scaffold(
+                    appBar: AppBar(),
+                    body: Column(
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _type = 'Digital';
+                              });
+                              FirebaseCrashlytics.instance
+                                  .setCustomKey('type', _type);
+                            },
+                            child: Text('Digital')),
+                        ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _type = 'Analogico';
+                              });
+                              FirebaseCrashlytics.instance
+                                  .setCustomKey('type', _type);
+                            },
+                            child: Text('Analogico')),
+                        ElevatedButton(
+                          child: Text('CRASH'),
+                          onPressed: () async {
+                            try {
+                              throw Exception('Teste');
+                            } catch (error, stackTrace) {
+                              await FirebaseCrashlytics.instance.recordError(
+                                error,
+                                stackTrace,
+                                reason: 'a error test',
+                              );
+                            }
+                          },
+                        )
+                      ],
+                    ));
+              }
+              return Center(child: CircularProgressIndicator());
+            }));
+  }
+}
+</code></pre>
+<p>Esse é o resultado no Console do Firebase:</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/21.png" alt="Galery"></p>
+<h2>Adicionando logs</h2>
+<p>Muitas vezes as informações que temos disponíveis no Crashlytics não são suficientes para entendermos o motivo de uma
+falha. Com isso, podemos optar por enviar algumas mensagens de log usando o método <code>log</code>.</p>
+<pre><code>import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State&#x3C;MyApp> {
+  final Future&#x3C;FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: FutureBuilder(
+            future: _initialization,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) return Center(child: Text('Error'));
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Scaffold(
+                    appBar: AppBar(),
+                    body: Column(
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              FirebaseCrashlytics.instance.log('Tap on "A"');
+                            },
+                            child: Text('A')),
+                        ElevatedButton(
+                            onPressed: () {
+                              FirebaseCrashlytics.instance.log('Tap on "B"');
+                            },
+                            child: Text('B')),
+                        ElevatedButton(
+                          child: Text('CRASH'),
+                          onPressed: () async {
+                            try {
+                              throw Exception('Teste');
+                            } catch (error, stackTrace) {
+                              await FirebaseCrashlytics.instance.recordError(
+                                error,
+                                stackTrace,
+                              );
+                            }
+                          },
+                        )
+                      ],
+                    ));
+              }
+              return Center(child: CircularProgressIndicator());
+            }));
+  }
+}
+</code></pre>
+<p>Resultado:</p>
+<p><img src="/monitorando-sua-aplicacao-flutter-em-producao/22.png" alt="Galery"></p>
+<h2>Vinculando usuário</h2>
+<p>Podemos vincular o usuário a um evento de erro usando o <code>setUserIdentifier</code>.</p>
+<p>Exemplo:</p>
+<pre><code>import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State&#x3C;MyApp> {
+  final Future&#x3C;FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: FutureBuilder(
+            future: _initialization,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) return Center(child: Text('Error'));
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Scaffold(
+                    appBar: AppBar(),
+                    body: Column(
+                      children: [
+                        ElevatedButton(
+                          child: Text('CRASH'),
+                          onPressed: () async {
+                            try {
+                              throw Exception('Teste');
+                            } catch (error, stackTrace) {
+                              await FirebaseCrashlytics.instance
+                                  .setUserIdentifier('25');
+                              await FirebaseCrashlytics.instance.recordError(
+                                error,
+                                stackTrace,
+                              );
+                            }
+                          },
+                        )
+                      ],
+                    ));
+              }
+              return Center(child: CircularProgressIndicator());
+            }));
+  }
+}
+</code></pre></div></div></div></main></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/monitorando-sua-aplicacao-flutter-em-producao";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-c38cd845a4181427323c.js"],"app":["/app-a914769348361b28f60e.js"],"component---src-pages-404-js":["/component---src-pages-404-js-0db82d6eeee6490b835e.js"],"component---src-pages-index-js":["/component---src-pages-index-js-e883ccb8ffa64182215e.js"],"component---src-pages-page-2-js":["/component---src-pages-page-2-js-6f9304e8e0b72f58449a.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-3048ecaa836bff2c3d61.js"]};/*]]>*/</script><script src="/polyfill-c38cd845a4181427323c.js" nomodule=""></script><script src="/component---src-templates-blog-template-js-3048ecaa836bff2c3d61.js" async=""></script><script src="/commons-846ab9b864e6dbbdd9b6.js" async=""></script><script src="/styles-407fe62976dc5310c43e.js" async=""></script><script src="/app-a914769348361b28f60e.js" async=""></script><script src="/framework-8e528b732ab2eaadb7b7.js" async=""></script><script src="/webpack-runtime-151e9955fd4a68841527.js" async=""></script></body></html>
