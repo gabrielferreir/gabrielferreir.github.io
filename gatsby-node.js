@@ -11,7 +11,8 @@ exports.createPages = ({actions, graphql}) => {
         edges {
           node {
             frontmatter {
-              path
+              path,
+              date(formatString: "YYYY-MM-DD")
             }
           }
         }
