@@ -17,7 +17,15 @@ Vamos começar.
 - [Criando projeto no Firebase](#criando-projeto-no-firebase)
 - [Instação no Android](#instalacao-no-android)
 - [Instação no IOS](#instalacao-no-ios)
-- [Instação no Web](#instalacao-na-web)
+- [Instalando pacotes](#instalando-pacotes)
+- [Configurando Crashlytics no Android](#configurando-crashlytics-no-android)
+- [Configurando Crashlytics no IOS](#configurando-crashlytics-no-ios)
+- [Iniciando Crashlytics](#iniciando-o-crashlytics)
+- [Simulando um crash](#simulando-um-crash)
+- [Enviando um erro](#enviando-um-erro)
+- [Adicionando uma chave personalizada](#adicionando-uma-chave-personalizada)
+- [Adicionando logs](#adicionando-logs)
+- [Vinculando usuário](#vinculando-usuario)
 
 <a name="criando-projeto-no-firebase"></a>
 
@@ -163,6 +171,7 @@ E adicione essa chave:
 </plist>
 ```
 
+<a name="instalando-pacotes"></a>
 ## Instalando pacotes
 
 Instale as dependências do Crashlytics.
@@ -175,6 +184,7 @@ dependencies:
   firebase_crashlytics: "^2.0.6"
 ```
 
+<a name="configurando-crashlytics-no-android"></a>
 ## Configurando Crashlytics no Android
 
 ```
@@ -200,6 +210,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 ```
 
+<a name="configurando-crashlytics-no-ios"></a>
 ## Configurando Crashlytics no IOS
 
 Abra sua aplicação no Xcode. Clique em "Runner", selecione a opção "Build Phases"
@@ -211,10 +222,12 @@ Adicione "${PODS_ROOT}/FirebaseCrashlytics/run" na caixa de texto.
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/18.png)
 
+<a name="ativacao-do-crashlytics"></a>
 ## Ativação do Crashlytics
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/19.png)
 
+<a name="iniciando-o-crashlytics"></a>
 ## Iniciando o Crashlytics
 
 No seu arquivo **main.dart** faça a inicialização do Firebase.
@@ -258,7 +271,8 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-## Evento de Crash
+<a name="simulando-um-crash"></a>
+## Simulando um crash
 
 Adicione um botão e simule um evento de crash na aplicação.
 
@@ -275,6 +289,7 @@ Rode sua aplicação e clique no botão Crash. Após isso esperamos que chegue u
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/20.png)
 
+<a name="enviando-um-erro"></a>
 ## Enviando um erro
 
 Você pode enviar um erro manualmente para o Crashlytics utilizando o ```recordError```.
@@ -306,6 +321,7 @@ onPressed: () async {
 ...
 ```
 
+<a name="adicionando-uma-chave-personalizada"></a>
 ## Adicionando uma chave personalizada
 
 Podemos adicionar chaves personalizadas ao erro do Crashlytics, para isso usamos o método ```setCustomKey```.
@@ -388,6 +404,7 @@ Esse é o resultado no Console do Firebase:
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/21.png)
 
+<a name="adicionando-logs"></a>
 ## Adicionando logs
 
 Muitas vezes as informações que temos disponíveis no Crashlytics não são suficientes para entendermos o motivo de uma
@@ -461,6 +478,7 @@ Resultado:
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/22.png)
 
+<a name="vinculando-usuario"></a>
 ## Vinculando usuário
 
 Podemos vincular o usuário a um evento de erro usando o ```setUserIdentifier```.
