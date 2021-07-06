@@ -26,6 +26,8 @@ Vamos começar.
 - [Adicionando uma chave personalizada](#adicionando-uma-chave-personalizada)
 - [Adicionando logs](#adicionando-logs)
 - [Vinculando usuário](#vinculando-usuario)
+- [Tramento de erros](#tratamento-de-erros)
+- [Tramento de erros](#tratamento-de-erros)
 
 <a name="criando-projeto-no-firebase"></a>
 
