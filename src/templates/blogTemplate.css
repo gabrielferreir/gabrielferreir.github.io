@@ -40,9 +40,13 @@ pre {
     font-size: 16px;
     font-weight: 400;
     color: rgba(0, 0, 0, .87);
-    background-color: #FAFAFA;
+    background-color: #f6f7f9;
     padding: 16px 32px;
     overflow-x: auto;
+}
+
+code {
+    background-color: #f6f7f9;
 }
 
 .blog-post-container h1 {
