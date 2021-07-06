@@ -133,8 +133,8 @@ Selecione a opção "Adicionar app", após isso selecione "IOS".
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/07.png)
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/08.png)
 
-Da mesma forma que fizemos no Android, devemos utilizar o nome do pacote igual ao que está no "Bundle
-identifier" do IOS.
+Da mesma forma que fizemos no Android, devemos utilizar o nome do pacote igual ao que está no "Bundle identifier" do
+IOS.
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/09.png)
 
@@ -172,6 +172,7 @@ E adicione essa chave:
 ```
 
 <a name="instalando-pacotes"></a>
+
 ## Instalando pacotes
 
 Instale as dependências do Crashlytics.
@@ -185,6 +186,7 @@ dependencies:
 ```
 
 <a name="configurando-crashlytics-no-android"></a>
+
 ## Configurando Crashlytics no Android
 
 ```
@@ -211,6 +213,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 ```
 
 <a name="configurando-crashlytics-no-ios"></a>
+
 ## Configurando Crashlytics no IOS
 
 Abra sua aplicação no Xcode. Clique em "Runner", selecione a opção "Build Phases"
@@ -223,11 +226,13 @@ Adicione "${PODS_ROOT}/FirebaseCrashlytics/run" na caixa de texto.
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/18.png)
 
 <a name="ativacao-do-crashlytics"></a>
+
 ## Ativação do Crashlytics
 
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/19.png)
 
 <a name="iniciando-o-crashlytics"></a>
+
 ## Iniciando o Crashlytics
 
 No seu arquivo **main.dart** faça a inicialização do Firebase.
@@ -272,6 +277,7 @@ class _MyAppState extends State<MyApp> {
 ```
 
 <a name="simulando-um-crash"></a>
+
 ## Simulando um crash
 
 Adicione um botão e simule um evento de crash na aplicação.
@@ -290,6 +296,7 @@ Rode sua aplicação e clique no botão Crash. Após isso esperamos que chegue u
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/20.png)
 
 <a name="enviando-um-erro"></a>
+
 ## Enviando um erro
 
 Você pode enviar um erro manualmente para o Crashlytics utilizando o ```recordError```.
@@ -322,6 +329,7 @@ onPressed: () async {
 ```
 
 <a name="adicionando-uma-chave-personalizada"></a>
+
 ## Adicionando uma chave personalizada
 
 Podemos adicionar chaves personalizadas ao erro do Crashlytics, para isso usamos o método ```setCustomKey```.
@@ -405,6 +413,7 @@ Esse é o resultado no Console do Firebase:
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/21.png)
 
 <a name="adicionando-logs"></a>
+
 ## Adicionando logs
 
 Muitas vezes as informações que temos disponíveis no Crashlytics não são suficientes para entendermos o motivo de uma
@@ -479,6 +488,7 @@ Resultado:
 ![Galery](/monitorando-sua-aplicacao-flutter-em-producao/22.png)
 
 <a name="vinculando-usuario"></a>
+
 ## Vinculando usuário
 
 Podemos vincular o usuário a um evento de erro usando o ```setUserIdentifier```.
@@ -542,19 +552,18 @@ class _MyAppState extends State<MyApp> {
 ```
 
 <a name="tratamento-de-erros"></a>
+
 ## Tratamento de erros
 
-Fazemos uma tratamento para que nossa aplicação detecte erros e faça o envio 
-do erro para o Crashlytics automaticamente.
+Fazemos uma tratamento para que nossa aplicação detecte erros e faça o envio do erro para o Crashlytics automaticamente.
 
 Vamos trabalhar com a captura de dois tipos de erro:
 
-**FlutterError**: Problemas lançados na estrutura do Flutter. 
+**FlutterError**: Problemas lançados na estrutura do Flutter.
 
 Ex:. Problemas de renderização e erros síncronos.
 
-**ZoneError**: Problemas que não conseguem ser detectados pelo Flutter, mas são 
-detectados via ``runZonedGuarded``.
+**ZoneError**: Problemas que não conseguem ser detectados pelo Flutter, mas são detectados via ``runZonedGuarded``.
 
 Ex:. Erros assíncronos.
 
@@ -612,5 +621,21 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+No nosso caso, enviaremos o erro capturado para o Crashlytics. Para isso vamos utilizar a função ``recordFlutterError``
+quando for um erro do Flutter e
+``recordError`` quando for um erro na Zones.
 
+```
+...
+Future<void> main() async {
+  runZonedGuarded(() {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+    runApp(MyApp());
+  }, FirebaseCrashlytics.instance.recordError);
+}
+...
+```
 
