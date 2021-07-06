@@ -1,6 +1,6 @@
 ---
 path: "/blog/monitorando-sua-aplicacao-flutter-em-producao"
-date: "2021-07-04"
+date: "2021-07-05"
 title: "Monitorando sua aplicação Flutter em produção"
 ---
 
@@ -555,19 +555,20 @@ class _MyAppState extends State<MyApp> {
 
 ## Tratamento de erros
 
-Fazemos uma tratamento para que nossa aplicação detecte erros e faça o envio do erro para o Crashlytics automaticamente.
+Faremos o tratamento para que nossa aplicação detecte erros e faça o envio do erro para o Crashlytics automaticamente.
 
-Vamos trabalhar com a captura de dois tipos de erro:
+Vamos trabalhar com a captura de dois tipos de erros:
 
 **FlutterError**: Problemas lançados na estrutura do Flutter.
 
 Ex:. Problemas de renderização e erros síncronos.
 
-**ZoneError**: Problemas que não conseguem ser detectados pelo Flutter, mas são detectados via ``runZonedGuarded``.
+**ZoneError**: Problemas que não conseguem ser detectados pelo Flutter, mas são detectados via
+``runZonedGuarded``.
 
 Ex:. Erros assíncronos.
 
-Exemplo de captura:
+Abaixo está um exemplo onde reproduzimos esses dois cenários.
 
 ```
 import 'dart:async';
@@ -621,9 +622,9 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-No nosso caso, enviaremos o erro capturado para o Crashlytics. Para isso vamos utilizar a função ``recordFlutterError``
-quando for um erro do Flutter e
-``recordError`` quando for um erro na Zones.
+No nosso caso, enviaremos o erro capturado para o Crashlytics. Para isso vamos utilizar a função
+``recordFlutterError`` quando for um erro do Flutter e ``recordError`` quando for um erro na
+Zones.
 
 ```
 ...
@@ -639,3 +640,7 @@ Future<void> main() async {
 ...
 ```
 
+
+Veja o exemplo completo em: https://github.com/gabrielferreir/demo_crashlytis
+
+Qualquer dúvida ou sugestão, estou à disposição! Valeeeeu.
