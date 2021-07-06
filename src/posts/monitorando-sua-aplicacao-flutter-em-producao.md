@@ -541,5 +541,76 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+<a name="tratamento-de-erros"></a>
+## Tratamento de erros
+
+Fazemos uma tratamento para que nossa aplicação detecte erros e faça o envio 
+do erro para o Crashlytics automaticamente.
+
+Vamos trabalhar com a captura de dois tipos de erro:
+
+**FlutterError**: Problemas lançados na estrutura do Flutter. 
+
+Ex:. Problemas de renderização e erros síncronos.
+
+**ZoneError**: Problemas que não conseguem ser detectados pelo Flutter, mas são 
+detectados via ``runZonedGuarded``.
+
+Ex:. Erros assíncronos.
+
+Exemplo de captura:
+
+```
+import 'dart:async';
+import 'package:flutter/material.dart';
+
+Future<void> main() async {
+  runZonedGuarded(() {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    FlutterError.onError = (FlutterErrorDetails errorDetails) {
+      print('FlutterError');
+    };
+
+    runApp(MyApp());
+  }, (error, stackTrace) {
+    print('ZoneError');
+  });
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(),
+            body: Column(
+              children: [
+                ElevatedButton(
+                  child: Text('CRASH'),
+                  onPressed: () {
+                    throw Exception('Teste');
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Future.delayed(
+                        Duration.zero, () => throw Exception('async error'));
+                  },
+                  child: Text('CRASH ASSINCRONO'),
+                ),
+              ],
+            )));
+  }
+}
+```
+
 
 
