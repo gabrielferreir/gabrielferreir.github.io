@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
             <div className="navbar__image"></div>
             <div>
               <h1 className="navbar__name">Gabriel Ferreira</h1>
-              <h2 className="navbar__work">Fullstack Developer</h2>
+              <h2 className="navbar__work">Software Developer at CVC Corp.</h2>
             </div>
           </header>
         </Link>
